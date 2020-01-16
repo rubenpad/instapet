@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import { App } from './App'
+
 const container = document.getElementById('app')
 
-const hola = <h1>Seguimos adelate con el proyecto!</h1>
-
-ReactDOM.render(hola, container)
+ReactDOM.render(<App />, container)

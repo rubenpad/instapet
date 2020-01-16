@@ -9,7 +9,7 @@
     "lint": "standard",
     "now-build": "yarn build",
     "build": "webpack",
-    "dev": "webpack-dev-server open --mode development"
+    "dev": "webpack-dev-server --open --mode development"
   },
   "devDependencies": {
     "@babel/core": "7.8.3",
@@ -19,14 +19,14 @@
     "babel-plugin-styled-components": "1.10.6",
     "html-webpack-plugin": "3.2.0",
     "standard": "14.3.1",
-    "styled-components": "5.0.0",
     "webpack": "4.41.5",
     "webpack-cli": "3.3.10",
     "webpack-dev-server": "3.10.1"
   },
   "dependencies": {
     "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react-dom": "^16.12.0",
+    "styled-components": "5.0.0"
   },
   "standard": {
     "ignore": [
