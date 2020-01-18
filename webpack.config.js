@@ -2,7 +2,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   output: {
-    filename: 'app.bundle.js'
+    filename: '[name].js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -12,7 +13,10 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            plugins: ['@babel/plugin-syntax-dynamic-import'],
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              'babel-plugin-styled-components'
+            ],
             presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }

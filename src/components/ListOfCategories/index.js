@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import { useQuery } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
 
-import { useCategoriesData } from '../../hooks/useCategoriesData'
 import { Category } from '../Category'
 import { List, Item } from './styles'
 
+const GET_CATEGORIES = gql`
+  query getCategories {
+    categories {
+      id
+      cover
+      path
+      emoji
+    }
+  }
+`
+
 export const ListOfCategories = () => {
-  const { categories, loading } = useCategoriesData()
+  const { data, loading, error } = useQuery(GET_CATEGORIES)
+
   const [showFixed, setShowFixed] = useState(false)
 
   useEffect(() => {
@@ -19,16 +32,18 @@ export const ListOfCategories = () => {
     return () => document.removeEventListener('scroll', onScroll)
   }, [showFixed])
 
-  const renderList = fixed => (
-    <List fixed={fixed}>
-      {categories.length > 0 &&
-        categories.map(category => (
+  if (error) return <p>{error}</p>
+
+  if (loading) return <p>Loading...</p>
+
+  return (
+    <List fixed={showFixed}>
+      {data.categories.length > 0 &&
+        data.categories.map(category => (
           <Item key={category.id}>
-            <Category {...category} />
+            <Category {...category} path={`/pet/${category.id}`} />
           </Item>
         ))}
     </List>
   )
-
-  return <>{loading ? <h1>Loading...</h1> : renderList(showFixed)}</>
 }

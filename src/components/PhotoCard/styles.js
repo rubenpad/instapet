@@ -1,16 +1,6 @@
 import styled from 'styled-components'
 import { fadeIn } from '../../styles/animation'
 
-import { MdFavorite, MdFavoriteBorder } from 'react-icons/md'
-
-export const IconFavoriteBorder = styled(MdFavoriteBorder)`
-  color: lightcoral;
-`
-
-export const IconFavorite = styled(MdFavorite)`
-  color: lightcoral;
-`
-
 export const Article = styled.article`
   min-height: 200px;
 `
@@ -33,18 +23,4 @@ export const Image = styled.img`
   width: 100%;
 
   ${fadeIn()}
-`
-
-export const Button = styled.button`
-  padding-top: 8px;
-  display: flex;
-  align-items: center;
-
-  & svg {
-    margin-right: 4px;
-  }
-
-  &:hover {
-    cursor: pointer;
-  }
 `
