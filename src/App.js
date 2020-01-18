@@ -3,25 +3,43 @@ import { Router } from '@reach/router'
 
 import { GlobalStyle } from './styles/GlobalStyles'
 import { Logo } from './components/Logo'
-import { PhotoCardWithQuery } from './containers/PhotoCardWithQuery'
+import { Detail } from './pages/Detail'
 import { Home } from './pages/Home'
+import { Favs } from './pages/Favs'
+import { User } from './pages/User'
+import { NotRegisteredUser } from './pages/NotRegisteredUser'
+import { NavBar } from './components/NavBar'
+
+const UserLogged = ({ children }) => {
+  return children({ isAuth: true })
+}
 
 export const App = () => {
-  const urlParams = new window.URLSearchParams(window.location.search)
-  const detailId = urlParams.get('detail')
-
   return (
     <>
       <GlobalStyle />
       <Logo />
-      {detailId ? (
-        <PhotoCardWithQuery id={detailId} />
-      ) : (
-        <Router>
-          <Home path="/" />
-          <Home path="/pet/:id" />
-        </Router>
-      )}
+      <Router>
+        <Home path="/" />
+        <Home path="/pet/:id" />
+        <Detail path="/detail/:detailId" />
+      </Router>
+      <UserLogged>
+        {({ isAuth }) => {
+          return isAuth ? (
+            <Router>
+              <Favs path="/favs" />
+              <User path="/user" />
+            </Router>
+          ) : (
+            <Router>
+              <NotRegisteredUser path="/favs" />
+              <NotRegisteredUser path="/user" />
+            </Router>
+          )
+        }}
+      </UserLogged>
+      <NavBar />
     </>
   )
 }

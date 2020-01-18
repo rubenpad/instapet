@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { Link } from '@reach/router'
 import { gql } from 'apollo-boost'
 import { useMutation } from '@apollo/react-hooks'
 
@@ -38,11 +39,11 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
     <Article ref={ref}>
       {shouldShow && (
         <>
-          <a href={`/?detail=${id}`}>
+          <Link to={`/detail/${id}`}>
             <ImgWrapper>
               <Image src={src} />
             </ImgWrapper>
-          </a>
+          </Link>
 
           <FavButton likes={likes} liked={liked} onClick={handleClick} />
         </>
