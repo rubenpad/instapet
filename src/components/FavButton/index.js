@@ -8,7 +8,8 @@ export const FavButton = ({ likes, liked, onClick }) => {
   return (
     <Button onClick={onClick}>
       <Icon size="32px" />
-      {likes} Likes
+      {likes}
+      Likes
     </Button>
   )
 }
