@@ -8,7 +8,8 @@ import { Detail } from './pages/Detail'
 import { Home } from './pages/Home'
 import { Favs } from './pages/Favs'
 import { User } from './pages/User'
-import { NotRegisteredUser } from './pages/NotRegisteredUser'
+import { Signup } from './pages/Signup'
+import { Signin } from './pages/Signin'
 import { NavBar } from './components/NavBar'
 
 export const App = () => {
@@ -30,8 +31,9 @@ export const App = () => {
             </Router>
           ) : (
             <Router>
-              <NotRegisteredUser path="/favs" />
-              <NotRegisteredUser path="/user" />
+              <Signup path="/favs" />
+              <Signup path="/user" />
+              <Signin path="/signin" />
             </Router>
           )
         }}
