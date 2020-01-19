@@ -25,7 +25,7 @@ export const PhotoCards = ({ categoryId }) => {
   if (error) return <p>{error}</p>
 
   if (loading) return <p>Loading...</p>
-  
+
   const { photos } = data
 
   return <ListOfPhotoCards photos={photos} />

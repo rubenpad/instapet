@@ -1,33 +1,32 @@
 import React, { useContext } from 'react'
 import { Link } from '@reach/router'
-import { gql } from 'apollo-boost'
 import { useMutation } from '@apollo/react-hooks'
+import { gql } from 'apollo-boost'
 
 import { Context } from '../Context'
 import { Action } from './styles'
 import { UserForm } from '../components/UserForm'
 
-const REGISTER = gql`
-  mutation signup($input: UserCredentials!) {
-    signup(input: $input)
+const LOGIN = gql`
+  mutation login($input: UserCredentials!) {
+    login(input: $input)
   }
 `
 
-export const Signup = () => {
-  const [register, { loading, error }] = useMutation(REGISTER)
+export const Login = () => {
+  const [signin, { loading, error }] = useMutation(LOGIN)
   const { activateAuth } = useContext(Context)
 
   const onSubmit = async ({ email, password }) => {
     const variables = { input: { email, password } }
 
     const {
-      data: { signup }
-    } = await register({ variables })
-
-    activateAuth(signup)
+      data: { login }
+    } = await signin({ variables })
+    activateAuth(login)
   }
 
-  const errorMsg = error && 'The user already exists or an error has occurred'
+  const errorMsg = error && 'The user or password is incorrect!'
 
   return (
     <>
@@ -35,11 +34,11 @@ export const Signup = () => {
         error={errorMsg}
         disabled={loading}
         onSubmit={onSubmit}
-        title="Register"
+        title="Log in"
       />
       <Action>
-        <span>Have an account?</span>
-        <Link to="/user/login">Log in</Link>
+        <span>Don&#39;t have an account?</span>
+        <Link to="/user/signup">Sign up</Link>
       </Action>
     </>
   )

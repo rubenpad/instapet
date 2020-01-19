@@ -3,7 +3,6 @@ import { Link } from '@reach/router'
 import { gql } from 'apollo-boost'
 import { useMutation } from '@apollo/react-hooks'
 
-import { useLocalStorage } from '../../hooks/useLocalStorage'
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver'
 
 import { Article, ImgWrapper, Image } from './styles'
@@ -14,7 +13,7 @@ const DEFAULT_IMAGE =
 
 const LIKE_PHOTO = gql`
   mutation($input: LikePhoto!) {
-    likeAnonymousPhoto(input: $input) {
+    likePhoto(input: $input) {
       id
       likes
       liked
@@ -22,17 +21,13 @@ const LIKE_PHOTO = gql`
   }
 `
 
-export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
+export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
   const ref = useRef(null)
   const shouldShow = useIntersectionObserver(ref)
-
-  const key = `like-${id}`
-  const [liked, setLiked] = useLocalStorage(key, false)
   const [toggleLikePhoto] = useMutation(LIKE_PHOTO)
 
   const handleClick = () => {
     toggleLikePhoto({ variables: { input: { id } } })
-    setLiked(!liked)
   }
 
   return (
@@ -44,7 +39,6 @@ export const PhotoCard = ({ id, likes = 0, src = DEFAULT_IMAGE }) => {
               <Image src={src} />
             </ImgWrapper>
           </Link>
-
           <FavButton likes={likes} liked={liked} onClick={handleClick} />
         </>
       )}

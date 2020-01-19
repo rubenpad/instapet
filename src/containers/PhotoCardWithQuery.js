@@ -20,6 +20,8 @@ const GET_SINGLE_PHOTO = gql`
 export const PhotoCardWithQuery = id => {
   const { data, loading, error } = useQuery(GET_SINGLE_PHOTO, { variables: id })
 
+  if (error) return <p>An error has ocurred</p>
+
   if (loading) return <p>Loading...</p>
 
   return <PhotoCard {...data.photo} />
