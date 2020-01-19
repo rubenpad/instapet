@@ -14,7 +14,7 @@ const SIGN_UP = gql`
 `
 
 export const Signup = () => {
-  const [signup] = useMutation(SIGN_UP)
+  const [signup, { loading, error }] = useMutation(SIGN_UP)
 
   return (
     <Context.Consumer>
@@ -30,12 +30,20 @@ export const Signup = () => {
           }).then(activateAuth)
         }
 
+        const errorMsg =
+          error && 'The user already exists or an error has occurred'
+
         return (
           <>
-            <UserForm onSubmit={onSubmit} title="Sign up" />
+            <UserForm
+              error={errorMsg}
+              disabled={loading}
+              onSubmit={onSubmit}
+              title="Sign up"
+            />
             <Action>
               <span>Have an account?</span>
-              <Link to="/signin">Sign in</Link>
+              <Link to="/user/signin">Sign in</Link>
             </Action>
           </>
         )

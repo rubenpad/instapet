@@ -1,7 +1,7 @@
-import React from 'react'
-import { Router } from '@reach/router'
+import React, { useContext } from 'react'
+import { Router, Redirect } from '@reach/router'
 
-import Context from './Context'
+import { Context } from './Context'
 import { GlobalStyle } from './styles/GlobalStyles'
 import { Logo } from './components/Logo'
 import { Detail } from './pages/Detail'
@@ -13,6 +13,8 @@ import { Signin } from './pages/Signin'
 import { NavBar } from './components/NavBar'
 
 export const App = () => {
+  const { isAuth } = useContext(Context)
+
   return (
     <>
       <GlobalStyle />
@@ -21,23 +23,15 @@ export const App = () => {
         <Home path="/" />
         <Home path="/pet/:id" />
         <Detail path="/detail/:detailId" />
+        {!isAuth && <Signup path="/user/signup" />}
+        {!isAuth && <Signin path="/user/signin" />}
+        {!isAuth && <Redirect noThrow from="/user" to="/user/signup" />}
+        {!isAuth && <Redirect noThrow from="/favs" to="/user/signup" />}
+        {isAuth && <Redirect noThrow from="/user/signup" to="/user" />}
+        {isAuth && <Redirect noThrow from="/user/signin" to="/user" />}
+        {isAuth && <User path="/user" />}
+        {isAuth && <Favs path="/favs" />}
       </Router>
-      <Context.Consumer>
-        {({ isAuth }) => {
-          return isAuth ? (
-            <Router>
-              <Favs path="/favs" />
-              <User path="/user" />
-            </Router>
-          ) : (
-            <Router>
-              <Signup path="/favs" />
-              <Signup path="/user" />
-              <Signin path="/signin" />
-            </Router>
-          )
-        }}
-      </Context.Consumer>
       <NavBar />
     </>
   )

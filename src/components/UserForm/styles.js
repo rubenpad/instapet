@@ -27,3 +27,9 @@ export const Title = styled.h2`
   text-align: center;
   font-weight: 500;
 `
+
+export const StyledError = styled.span`
+  margin: 10px auto;
+  color: lightcoral;
+  font-weight: 500;
+`
