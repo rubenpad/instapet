@@ -1,12 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <title>Petgram</title>
-    </head>
-    <body>
-        <div id="app"></div>
-    </body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Petgram</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <noscript>You need to enable Javascript to run this app.</noscript>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', async function() {
+          try {
+            const ServiceWorkerRegistration = await navigator.serviceWorker.register(
+              '/service-worker.js'
+            )
+
+            if (ServiceWorkerRegistration.active.state === 'activated') {
+              console.log('SW registered successfully!')
+            }
+          } catch (error) {
+            console.log('SW is not active', error)
+          }
+        })
+      }
+    </script>
+  </body>
 </html>
