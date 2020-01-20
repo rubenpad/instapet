@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { Helmet } from 'react-helmet'
 import { Link } from '@reach/router'
 import { useMutation } from '@apollo/react-hooks'
 import { gql } from 'apollo-boost'
@@ -13,7 +14,7 @@ const LOGIN = gql`
   }
 `
 
-export const Login = () => {
+export default () => {
   const [signin, { loading, error }] = useMutation(LOGIN)
   const { activateAuth } = useContext(Context)
 
@@ -30,6 +31,9 @@ export const Login = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Login</title>
+      </Helmet>
       <UserForm
         error={errorMsg}
         disabled={loading}

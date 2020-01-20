@@ -1,3 +1,17 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 
-export const Favs = () => <h1>Favs Page</h1>
+import { GetFavorites } from '../containers/GetFavorites'
+import { Title } from './styles'
+
+export default () => {
+  return (
+    <>
+      <Helmet>
+        <title>Favorites</title>
+      </Helmet>
+      <Title>Favorites</Title>
+      <GetFavorites />
+    </>
+  )
+}

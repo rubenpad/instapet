@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link as LinkRouter } from '@reach/router'
 
 export const Action = styled.div`
   width: 100%;
@@ -13,4 +14,14 @@ export const Action = styled.div`
     color: #8d00ff;
     cursor: pointer;
   }
+`
+
+export const Title = styled.h2`
+  text-align: center;
+  margin-bottom: 1rem;
+`
+
+export const Link = styled(LinkRouter)`
+  text-decoration: none;
+  color: #000;
 `

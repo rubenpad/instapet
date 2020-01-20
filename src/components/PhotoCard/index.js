@@ -1,34 +1,20 @@
 import React, { useRef } from 'react'
 import { Link } from '@reach/router'
-import { gql } from 'apollo-boost'
-import { useMutation } from '@apollo/react-hooks'
+import PropTypes from 'prop-types'
 
 import { useIntersectionObserver } from '../../hooks/useIntersectionObserver'
-
+import { useToggleLikePhoto } from '../../hooks/useToggleLikePhoto'
 import { Article, ImgWrapper, Image } from './styles'
 import { FavButton } from '../FavButton'
 
 const DEFAULT_IMAGE =
   'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=60'
 
-const LIKE_PHOTO = gql`
-  mutation($input: LikePhoto!) {
-    likePhoto(input: $input) {
-      id
-      likes
-      liked
-    }
-  }
-`
-
 export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
   const ref = useRef(null)
   const shouldShow = useIntersectionObserver(ref)
-  const [toggleLikePhoto] = useMutation(LIKE_PHOTO)
 
-  const handleClick = () => {
-    toggleLikePhoto({ variables: { input: { id } } })
-  }
+  const { handleClick } = useToggleLikePhoto()
 
   return (
     <Article ref={ref}>
@@ -39,9 +25,20 @@ export const PhotoCard = ({ id, liked, likes = 0, src = DEFAULT_IMAGE }) => {
               <Image src={src} />
             </ImgWrapper>
           </Link>
-          <FavButton likes={likes} liked={liked} onClick={handleClick} />
+          <FavButton
+            likes={likes}
+            liked={liked}
+            onClick={() => handleClick(id)}
+          />
         </>
       )}
     </Article>
   )
+}
+
+PhotoCard.propTypes = {
+  id: PropTypes.string.isRequired,
+  liked: PropTypes.bool.isRequired,
+  likes: PropTypes.number.isRequired,
+  src: PropTypes.string.isRequired
 }

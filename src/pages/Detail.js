@@ -1,5 +1,18 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { Helmet } from 'react-helmet'
 
-import { PhotoCardWithQuery } from '../containers/PhotoCardWithQuery'
+import { GetSinglePhoto } from '../containers/GetSinglePhoto'
 
-export const Detail = ({ detailId }) => <PhotoCardWithQuery id={detailId} />
+export default function Detail({ detailId }) {
+  return (
+    <div style={{ padding: '0 0.5rem' }}>
+      <Helmet>
+        <title>Detail | Petgram</title>
+      </Helmet>
+      <GetSinglePhoto id={detailId} />
+    </div>
+  )
+}
+
+Detail.propTypes = { detailId: PropTypes.string }

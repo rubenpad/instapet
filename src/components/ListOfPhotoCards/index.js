@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import { PhotoCard } from '../PhotoCard'
 
 export const ListOfPhotoCards = ({ photos }) => {
@@ -9,4 +11,8 @@ export const ListOfPhotoCards = ({ photos }) => {
       ))}
     </ul>
   )
+}
+
+ListOfPhotoCards.propTypes = {
+  photos: PropTypes.array.isRequired
 }

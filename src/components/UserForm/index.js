@@ -1,8 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { useInputValue } from '../../hooks/useInputValue'
 import { Loader } from '../Loader'
-import { Title, Form, Input, Button, StyledError } from './styles'
+import { Title, Form, Input, StyledError } from './styles'
+import { SubmitButton } from '../SubmitButton'
 
 export const UserForm = ({ error, disabled, onSubmit, title }) => {
   const email = useInputValue('')
@@ -21,6 +23,7 @@ export const UserForm = ({ error, disabled, onSubmit, title }) => {
       <Form onSubmit={handleSubmit}>
         <Title>{title}</Title>
         <Input
+          name="email"
           type="email"
           placeholder="Email"
           {...email}
@@ -28,6 +31,7 @@ export const UserForm = ({ error, disabled, onSubmit, title }) => {
           disabled={disabled}
         />
         <Input
+          name="password"
           type="password"
           placeholder="Password"
           {...password}
@@ -36,8 +40,15 @@ export const UserForm = ({ error, disabled, onSubmit, title }) => {
         />
         {disabled && <Loader />}
         <StyledError>{error}</StyledError>
-        <Button type="submit">{title}</Button>
+        <SubmitButton disabled={disabled}>{title}</SubmitButton>
       </Form>
     </>
   )
+}
+
+UserForm.propTypes = {
+  error: PropTypes.string,
+  disabled: PropTypes.bool,
+  onSubmit: PropTypes.func,
+  title: PropTypes.string
 }
