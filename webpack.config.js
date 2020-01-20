@@ -1,4 +1,5 @@
 const path = require('path')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackPWAManifest = require('webpack-pwa-manifest')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
@@ -27,6 +28,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: 'src/index.html' }),
     new WebpackPWAManifest({
       name: 'Petgram | Your app to see pet photos',

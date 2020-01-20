@@ -20,23 +20,25 @@ export const App = () => {
 
   return (
     <Suspense fallback={<Loader />}>
-      <GlobalStyle />
-      <Logo />
-      <Router>
-        <NotFound default />
-        <Home path="/" />
-        <Home path="/pet/:id" />
-        <Detail path="/detail/:detailId" />
-        {!isAuth && <Signup path="/user/signup" />}
-        {!isAuth && <Login path="/user/login" />}
-        {!isAuth && <Redirect noThrow from="/user" to="/user/signup" />}
-        {!isAuth && <Redirect noThrow from="/favs" to="/user/signup" />}
-        {isAuth && <Redirect noThrow from="/user/signup" to="/" />}
-        {isAuth && <Redirect noThrow from="/user/login" to="/" />}
-        {isAuth && <User path="/user" />}
-        {isAuth && <Favs path="/favs" />}
-      </Router>
-      <NavBar />
+      <>
+        <GlobalStyle />
+        <Logo />
+        <Router>
+          <NotFound default />
+          <Home path="/" />
+          <Home path="/pet/:id" />
+          <Detail path="/detail/:detailId" />
+          {!isAuth && <Signup path="/user/signup" />}
+          {!isAuth && <Login path="/user/login" />}
+          {!isAuth && <Redirect noThrow from="/user" to="/user/signup" />}
+          {!isAuth && <Redirect noThrow from="/favs" to="/user/signup" />}
+          {isAuth && <Redirect noThrow from="/user/signup" to="/" />}
+          {isAuth && <Redirect noThrow from="/user/login" to="/" />}
+          {isAuth && <User path="/user" />}
+          {isAuth && <Favs path="/favs" />}
+        </Router>
+        <NavBar />
+      </>
     </Suspense>
   )
 }
