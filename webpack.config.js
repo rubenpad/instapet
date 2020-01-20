@@ -5,31 +5,17 @@ const WebpackPWAManifest = require('webpack-pwa-manifest')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
-  output: {
-    filename: '[name].js',
-    publicPath: '/'
+  entry: {
+    main: './src/index.js'
   },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            plugins: [
-              '@babel/plugin-transform-runtime',
-              'babel-plugin-styled-components'
-            ],
-            presets: ['@babel/preset-env', '@babel/preset-react']
-          }
-        }
-      }
-    ]
+  output: {
+    filename: '[name].bundle.js',
+    chunkFilename: '[name].bundle.js',
+    publicPath: '/'
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ template: 'src/index.html', inject: true }),
     new WebpackPWAManifest({
       name: 'Petgram | Your app to see pet photos',
       short_name: 'Petgram 🐶',
@@ -61,5 +47,24 @@ module.exports = {
         }
       ]
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            plugins: [
+              '@babel/plugin-transform-runtime',
+              'babel-plugin-styled-components',
+              '@babel/plugin-syntax-dynamic-import'
+            ],
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
+      }
+    ]
+  }
 }

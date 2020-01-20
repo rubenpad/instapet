@@ -4,6 +4,7 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from '@apollo/react-hooks'
 
 import Context from './Context'
+import { GlobalStyle } from './styles/GlobalStyles'
 import { App } from './App'
 
 const container = document.getElementById('app')
