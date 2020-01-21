@@ -1,3 +1,9 @@
-# curso-platzi-react-avanzado ⚛️
+# Instapet 🐶
 
-Repositorio con el código del [Curso Avanzado de React de Platzi](https://platzi.com/cursos/react-avanzado/)
+![Instapet App Screenshot](./screenshots/instapet.png)
+
+Stack:
+
+- React
+- GraphQL
+- Styled-Components
