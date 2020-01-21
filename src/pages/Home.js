@@ -7,7 +7,7 @@ import { GetListOfCategories } from '../containers/GetListOfCategories'
 export const Home = ({ id }) => (
   <>
     <Helmet>
-      <title>Petgram | See your favorite pet photos</title>
+      <title>Instapet | See your favorite pet photos</title>
       <meta name="description" content="App to view your favorite pet photos" />
     </Helmet>
     <GetListOfCategories />

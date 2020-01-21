@@ -17,8 +17,8 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: 'src/index.html', inject: true }),
     new WebpackPWAManifest({
-      name: 'Petgram | Your app to see pet photos',
-      short_name: 'Petgram 🐶',
+      name: 'Instapet | Your app to see pet photos',
+      short_name: 'Instapet 🐶',
       description: 'You can see pet photos',
       background_color: '#fff',
       theme_color: '#b1a',

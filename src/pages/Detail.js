@@ -8,7 +8,7 @@ export default function Detail({ detailId }) {
   return (
     <div style={{ padding: '0 0.5rem' }}>
       <Helmet>
-        <title>Detail | Petgram</title>
+        <title>Instapet | Detail</title>
       </Helmet>
       <GetSinglePhoto id={detailId} />
     </div>

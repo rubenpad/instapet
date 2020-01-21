@@ -32,7 +32,7 @@ export default () => {
   return (
     <>
       <Helmet>
-        <title>Login</title>
+        <title>Instapet | Login</title>
       </Helmet>
       <UserForm
         error={errorMsg}

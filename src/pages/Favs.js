@@ -8,7 +8,7 @@ export default () => {
   return (
     <>
       <Helmet>
-        <title>Favorites</title>
+        <title>Instapet | Favorites</title>
       </Helmet>
       <Title>Favorites</Title>
       <GetFavorites />

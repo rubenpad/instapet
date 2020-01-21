@@ -11,7 +11,7 @@ export default () => {
   return (
     <>
       <Helmet>
-        <title>User</title>
+        <title>Instapet | User</title>
       </Helmet>
       <Title>User</Title>
       <SubmitButton onClick={removeAuth}>Log out</SubmitButton>
