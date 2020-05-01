@@ -1,8 +1,12 @@
 const path = require('path')
+const Dotenv = require('dotenv-webpack')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackPWAManifest = require('webpack-pwa-manifest')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+
+const env =
+  process.env.NODE_ENV === 'production' ? '.production.env' : '.test.env'
 
 module.exports = {
   entry: {
@@ -14,6 +18,7 @@ module.exports = {
     publicPath: '/'
   },
   plugins: [
+    new Dotenv({ path: path.resolve(__dirname, env) }),
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({ template: 'src/index.html', inject: true }),
     new WebpackPWAManifest({

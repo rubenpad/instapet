@@ -19,17 +19,18 @@ const auth = jwt({
   credentialsRequired: false
 })
 
+const context = ({ req }) => {
+  const { id, email } = req.user || {}
+  return { id, email }
+}
+
 require('./adapter')
 
 const server = new ApolloServer({
-  introspection: true, // do this only for dev purposes
   playground: true, // do this only for dev purposes
   typeDefs,
   resolvers,
-  context: ({ req }) => {
-    const { id, email } = req.user || {}
-    return { id, email }
-  }
+  context
 })
 
 app.use(auth)
@@ -44,7 +45,7 @@ const errorHandler = (err, req, res, next) => {
 app.use(errorHandler)
 server.applyMiddleware({ app, path: '/graphql' })
 
-app.get('/categories', function(req, res) {
+app.get('/categories', (req, res) => {
   res.send(categories)
 })
 

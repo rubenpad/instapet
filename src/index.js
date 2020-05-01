@@ -7,9 +7,9 @@ import Context from './Context'
 import { App } from './App'
 
 const container = document.getElementById('app')
-
+const uri = process.env.URI
 const client = new ApolloClient({
-  uri: 'https://instapet-api.rubbenpad2.now.sh/graphql',
+  uri,
   request: (operation) => {
     const token = window.sessionStorage.getItem('token')
     const authorization = token ? `Bearer ${token}` : ''
